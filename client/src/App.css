@@ -4,43 +4,141 @@
   text-align: center;
 }
 
+.start-logo {
+  width: 50vw;
+}
+
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+  width: 250px;
+  height: fit-content;
 }
 
 .card {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
-
 .futurama-img {
   max-width: 2000px;
   width: 95vw;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  padding: 0.5rem 1rem;
+  background-color: #1a1928e3;
+}
+
+.avatar-container {
+  display: flex;
+  gap: 10px;
+}
+
+.avatar {
+  width: 75px;
+  height: 75px;
+  border: 3px solid #f7d059;
+  border-radius: 50%;
+}
+
+.faded {
+  transition: all 300ms ease;
+  opacity: 20%;
+  transform: scale(0.8);
+  animation: growAndShrink 500ms ease-in-out;
+}
+
+@keyframes growAndShrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    rotate: 10deg;
+  }
+  100% {
+    transform: scale(0.9);
+    rotate: -10deg;
+  }
+}
+
+.start-btn {
+  padding: 0.75rem 5rem;
+  border: 3px solid transparent;
+  color: #fff;
+  background-color: #f0211f;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+  transition: all 300ms ease;
+}
+
+.start-btn:hover {
+  cursor: pointer;
+  color: white;
+  border: 3px solid #e0b950;
+}
+
+.start-container {
+  border: 1px solid rgba(255, 255, 255, 0.224);
+  border-radius: 3rem;
+  background-color: rgba(255, 255, 255, 0.033);
+  padding: 5vh 5vw;
+}
+
+/* The Modal (background) */
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content/Box */
+.modal-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  background-color: #1a1928f1;
+  border-radius: 1rem 1rem 0 1rem;
+  border: 1px solid #888888b1;
+  width: fit-content;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.char-modal {
+  padding: 0 0.25rem;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.char-modal:hover {
+  cursor: pointer;
+  border-radius: 0.5rem;
+  background-color: hsla(244, 23%, 19%, 1);
 }

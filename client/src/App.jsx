@@ -1,18 +1,95 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./partials/Header";
 import Footer from "./partials/Footer";
-import "./App.css";
+import StartGame from "./StartGame";
+import ModalMenu from "./assets/ModalMenu";
 import futurama from "../src/assets/main-image-cropped.png";
+import "./App.css";
 
 function App() {
-  // Magnifier?
+  const [selected, setSelected] = useState([]);
+  const [gameStart, setGameStart] = useState(true); //Reset to false before deploy
+  const [clicked, setClicked] = useState(false);
+  const [modalMenu, setModalMenu] = useState({ x: null, y: null });
+  const [coords, setCoords] = useState({});
+  const [gameWon, setGameWon] = useState(false);
+  const [fadeAvatar, setFadeAvatar] = useState({
+    scruffy: false,
+    davinci: false,
+    nibbler: false,
+  });
+
+  function clickHandler(e) {
+    setClicked(true);
+    const pageX = e.pageX;
+    const pageY = e.pageY;
+
+    // Original image dimensions
+    const origWidth = 2362;
+    const origHeight = 3199;
+
+    // Image dimensions based on page width
+    const imgWidth = e.target.width;
+    const imgHeight = e.target.height;
+
+    // Offset of img on page
+    const imgOffsetX = e.target.offsetLeft;
+    const imgOffsetY = e.target.offsetTop;
+
+    // Location of target regardless of page size
+    const imgX = (pageX - imgOffsetX) * (origWidth / imgWidth);
+    const imgY = (pageY - imgOffsetY) * (origHeight / imgHeight);
+    setCoords({
+      x: imgX,
+      y: imgY,
+    });
+
+    // Get bounding box of image to account for scroll dimensions
+    const imgRect = e.target.getBoundingClientRect();
+
+    const modalX = pageX + imgRect.left - imgOffsetX;
+    const modalY = pageY + imgRect.top - imgOffsetY;
+
+    setModalMenu({ x: modalX, y: modalY });
+
+    const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
+
+    if (winningSelections.every((item) => selected.includes(item))) {
+      setGameWon(true);
+    }
+  }
   return (
     <>
-      <Header />
-      <div className="main-image">
-        <img src={futurama} alt="" className="futurama-img" />
-      </div>
-      <Footer />
+      {gameStart ? (
+        <>
+          <Header fadeAvatar={fadeAvatar} />
+
+          <div className="main-image">
+            {clicked ? (
+              <ModalMenu
+                setClicked={setClicked}
+                modalMenu={modalMenu}
+                coords={coords}
+                setSelected={setSelected}
+                setFadeAvatar={setFadeAvatar}
+              />
+            ) : (
+              ""
+            )}
+            <img
+              src={futurama}
+              alt=""
+              className="futurama-img"
+              onClick={(e) => {
+                clickHandler(e);
+              }}
+            />
+          </div>
+          <Footer />
+        </>
+      ) : (
+        <StartGame setGameStart={setGameStart} />
+      )}
     </>
   );
 }
