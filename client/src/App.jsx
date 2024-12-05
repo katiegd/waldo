@@ -10,7 +10,12 @@ function App() {
   const [selected, setSelected] = useState([]);
   const [gameStart, setGameStart] = useState(true); //Reset to false before deploy
   const [clicked, setClicked] = useState(false);
-  const [modalMenu, setModalMenu] = useState({ x: null, y: null });
+  const [modalMenu, setModalMenu] = useState({
+    x: null,
+    y: null,
+    translateX: null,
+    translateY: null,
+  });
   const [coords, setCoords] = useState({});
   const [gameWon, setGameWon] = useState(false);
   const [fadeAvatar, setFadeAvatar] = useState({
@@ -47,10 +52,33 @@ function App() {
     // Get bounding box of image to account for scroll dimensions
     const imgRect = e.target.getBoundingClientRect();
 
-    const modalX = pageX + imgRect.left - imgOffsetX;
-    const modalY = pageY + imgRect.top - imgOffsetY;
+    let modalX = pageX + imgRect.left - imgOffsetX;
+    let modalY = pageY + imgRect.top - imgOffsetY;
+    let translateX = "0%";
+    let translateY = "0%";
 
-    setModalMenu({ x: modalX, y: modalY });
+    if (pageX > window.innerWidth - 200) {
+      // 200 is modal width
+      translateX = "-101%";
+    } else if (pageX < 200) {
+      translateX = "1%";
+    }
+
+    if (pageY > window.innerHeight - 300) {
+      // 300 is the modal height{
+      translateY = "-101%";
+    } else if (pageY - window.innerHeight < 300) {
+      translateY = "1%";
+    }
+
+    setModalMenu({
+      x: modalX,
+      y: modalY,
+      translateX: translateX,
+      translateY: translateY,
+    });
+
+    console.log(modalMenu);
 
     const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
 

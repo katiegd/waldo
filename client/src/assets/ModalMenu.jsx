@@ -59,7 +59,7 @@ export default function ModalMenu({
         style={{
           top: `${modalMenu.y}px`,
           left: `${modalMenu.x}px`,
-          transform: "translate(-101%, -101%)",
+          transform: `translate(${modalMenu.translateX}, ${modalMenu.translateY})`,
         }}
       >
         <div
