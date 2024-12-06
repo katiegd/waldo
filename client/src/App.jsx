@@ -26,6 +26,7 @@ function App() {
 
   function clickHandler(e) {
     setClicked(true);
+
     const pageX = e.pageX;
     const pageY = e.pageY;
 
@@ -44,6 +45,7 @@ function App() {
     // Location of target regardless of page size
     const imgX = (pageX - imgOffsetX) * (origWidth / imgWidth);
     const imgY = (pageY - imgOffsetY) * (origHeight / imgHeight);
+
     setCoords({
       x: imgX,
       y: imgY,
@@ -78,14 +80,13 @@ function App() {
       translateY: translateY,
     });
 
-    console.log(modalMenu);
-
     const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
 
     if (winningSelections.every((item) => selected.includes(item))) {
       setGameWon(true);
     }
   }
+
   return (
     <>
       {gameStart ? (
