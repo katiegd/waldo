@@ -6,19 +6,23 @@ export default function ModalMenu({
   setClicked,
   modalMenu,
   coords,
+  selected,
   setSelected,
   setFadeAvatar,
 }) {
-  async function handleSelection(xCoord, yCoord, char) {
-    // Replace this coords logic with backend comms.
+  async function handleSelection(char) {
     // Save time & username to database.
 
+    console.log(coords.x, coords.y, char);
     try {
       const response = await fetch("http://localhost:3000/check-coordinates", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          x: coords.x,
-          y: coords.y,
+          x: Math.round(coords.x),
+          y: Math.round(coords.y),
           name: char,
         }),
       });
@@ -30,46 +34,20 @@ export default function ModalMenu({
         console.error(errorData.msg || "Fetch failed.");
         return;
       } else {
-        console.log(data);
+        if (data.coordMatch) {
+          setSelected((prevState) => [...prevState, data.coordMatch.name]);
+          setFadeAvatar((prevState) => ({
+            ...prevState,
+            [data.coordMatch.name]: true,
+          }));
+        } else {
+          console.log("Keep trying!");
+        }
       }
     } catch (error) {
       console.error(error);
     }
   }
-
-  // if (
-  //   char === "DaVinci" &&
-  //   coords.x >= 780 &&
-  //   coords.x <= 850 &&
-  //   coords.y <= 1850 &&
-  //   coords.y >= 1790
-  // ) {
-  //   setSelected((prevState) => [...prevState, "DaVinci"]);
-  //   setFadeAvatar((prevState) => ({ ...prevState, davinci: true }));
-  //   console.log("You found DaVinci!");
-  // } else if (
-  //   char === "Scruffy" &&
-  //   coords.x >= 630 &&
-  //   coords.x <= 680 &&
-  //   coords.y <= 2420 &&
-  //   coords.y >= 2350
-  // ) {
-  //   setSelected((prevState) => [...prevState, "Scruffy"]);
-  //   setFadeAvatar((prevState) => ({ ...prevState, scruffy: true }));
-  //   console.log("You found Scruffy!");
-  // } else if (
-  //   char === "Nibbler" &&
-  //   coords.x >= 2110 &&
-  //   coords.x <= 2150 &&
-  //   coords.y <= 700 &&
-  //   coords.y >= 640
-  // ) {
-  //   setSelected((prevState) => [...prevState, "Nibbler"]);
-  //   setFadeAvatar((prevState) => ({ ...prevState, nibbler: true }));
-  //   console.log("You found Nibbler!");
-  // } else {
-  //   console.log("Sorry, that's not right!");
-  // }
 
   return (
     <div

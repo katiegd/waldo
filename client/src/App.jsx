@@ -19,9 +19,9 @@ function App() {
   const [coords, setCoords] = useState({});
   const [gameWon, setGameWon] = useState(false);
   const [fadeAvatar, setFadeAvatar] = useState({
-    scruffy: false,
-    davinci: false,
-    nibbler: false,
+    Scruffy: false,
+    DaVinci: false,
+    Nibbler: false,
   });
 
   function clickHandler(e) {
@@ -80,6 +80,8 @@ function App() {
       translateY: translateY,
     });
 
+    console.log(fadeAvatar);
+
     const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
 
     if (winningSelections.every((item) => selected.includes(item))) {
@@ -99,6 +101,7 @@ function App() {
                 setClicked={setClicked}
                 modalMenu={modalMenu}
                 coords={coords}
+                selected={selected}
                 setSelected={setSelected}
                 setFadeAvatar={setFadeAvatar}
               />

@@ -26,13 +26,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/check-coordinates", async (req, res) => {
-  const { x, y, char } = req.body;
+  const { x, y, name } = req.body;
+
+  console.log("What's being sent:", x, y, name);
 
   try {
-    const coordMatch = await db.checkCoordinates(x, y, char);
-
+    const coordMatch = await db.checkCoordinates(x, y, name);
     if (coordMatch) {
-      res.status(200).json({ coordMatch, message: `You found ${char}` });
+      res
+        .status(200)
+        .json({ coordMatch, message: `You found ${coordMatch.name}` });
     } else {
       res.status(200).json({ message: `Nope. Keep looking!` });
     }

@@ -12,17 +12,17 @@ export default function Header({ fadeAvatar }) {
         <img
           src={Nibbler}
           alt=""
-          className={fadeAvatar.nibbler ? "avatar faded" : "avatar"}
+          className={fadeAvatar.Nibbler ? "avatar faded" : "avatar"}
         />
         <img
           src={Scruffy}
           alt=""
-          className={fadeAvatar.scruffy ? "avatar faded" : "avatar"}
+          className={fadeAvatar.Scruffy ? "avatar faded" : "avatar"}
         />
         <img
           src={DaVinci}
           alt=""
-          className={fadeAvatar.davinci ? "avatar faded" : "avatar"}
+          className={fadeAvatar.DaVinci ? "avatar faded" : "avatar"}
         />
       </div>
       <div className="timer">Timer</div>

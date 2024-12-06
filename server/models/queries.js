@@ -26,15 +26,19 @@ async function populateWinners() {
 }
 
 async function checkCoordinates(x, y, char) {
-  return await prisma.winners.findFirst({
+  console.log("This is in the queries call", x, y, char);
+
+  const winningClick = await prisma.winners.findFirst({
     where: {
       xMin: { lte: x },
       xMax: { gte: x },
-      yMin: { lte: x },
+      yMin: { lte: y },
       yMax: { gte: y },
       name: char,
     },
   });
+  console.log(winningClick);
+  return winningClick;
 }
 
 module.exports = {
