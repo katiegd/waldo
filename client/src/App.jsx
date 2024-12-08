@@ -23,15 +23,26 @@ function App() {
     DaVinci: false,
     Nibbler: false,
   });
+  const [popUpMessage, setPopUpMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
 
     if (winningSelections.every((item) => selected.includes(item))) {
       setGameWon(true);
-      console.log("You win!");
     }
   }, [selected]);
+
+  useEffect(() => {
+    if (popUpMessage) {
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+        setPopUpMessage("");
+      }, 2000);
+    }
+  }, [popUpMessage]);
 
   function clickHandler(e) {
     setClicked(true);
@@ -94,6 +105,11 @@ function App() {
     <>
       {gameStart ? (
         <>
+          {showMessage && (
+            <div className="popup-modal">
+              <div className={"popup-content"}>{popUpMessage}</div>
+            </div>
+          )}
           <Header
             gameStart={gameStart}
             fadeAvatar={fadeAvatar}
@@ -109,6 +125,7 @@ function App() {
                 selected={selected}
                 setSelected={setSelected}
                 setFadeAvatar={setFadeAvatar}
+                setPopUpMessage={setPopUpMessage}
               />
             ) : (
               ""

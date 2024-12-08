@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxanium&display=swap");
+
 #root {
   margin: 0 auto;
   padding: 2rem;
@@ -114,21 +116,6 @@
   width: 200px;
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .char-modal {
   padding: 0 0.25rem;
   display: flex;
@@ -142,13 +129,78 @@
   background-color: hsla(244, 23%, 19%, 1);
 }
 
-.popup-message {
+.timer {
+  text-align: end;
+  font-family: "Oxanium", monospace;
+  font-size: 3rem;
+  color: #f0211f;
+  text-shadow: 1px 1px 0 #e0b950, -1px 1px 0 #e0b950, -1px -1px 0 #e0b950,
+    1px -1px 0 #e0b950;
+}
+
+.popup-modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Modal Content/Box */
+.popup-content {
+  font-family: "Oxanium", monospace;
+  font-size: 1.4rem;
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  right: 30px;
+  top: 200px;
   padding: 1rem;
-  background-color: #1a1928f1;
-  border: 1px solid #888888b1;
-  width: 200px;
+  background-color: #d41d1ae0;
+  color: #fefefe;
+  font-weight: 500;
+  border: 1px solid #fefefe;
+  border-radius: 0.1rem;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: slide-fade-in 2000ms ease-out forwards;
+}
+
+@keyframes slide-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateX(-2%);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-fade-out {
+  from {
+    opacity: 1;
+    transform: translateX(0%); /* Start in final position */
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%); /* Move off-screen */
+  }
 }

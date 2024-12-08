@@ -9,6 +9,7 @@ export default function ModalMenu({
   coords,
   setSelected,
   setFadeAvatar,
+  setPopUpMessage,
 }) {
   // Show popUp for 5 seconds, then hides and clears the message.
 
@@ -40,8 +41,9 @@ export default function ModalMenu({
           ...prevState,
           [data.coordMatch.name]: true,
         }));
+        setPopUpMessage(`You found ${data.coordMatch.name}!`);
       } else {
-        console.log("Sorry, keep trying!");
+        setPopUpMessage("Sorry, that's not right!");
       }
     } catch (error) {
       console.error(error);
