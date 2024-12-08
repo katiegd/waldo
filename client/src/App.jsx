@@ -3,12 +3,13 @@ import Header from "./partials/Header";
 import Footer from "./partials/Footer";
 import StartGame from "./StartGame";
 import ModalMenu from "./assets/ModalMenu";
+import WinnerModal from "./WinnerModal";
 import futurama from "../src/assets/main-image-cropped.png";
 import "./App.css";
 
 function App() {
   const [selected, setSelected] = useState([]);
-  const [gameStart, setGameStart] = useState(true); //Reset to false before deploy
+  const [gameStart, setGameStart] = useState(false); //Reset to false before deploy
   const [clicked, setClicked] = useState(false);
   const [modalMenu, setModalMenu] = useState({
     x: null,
@@ -25,12 +26,14 @@ function App() {
   });
   const [popUpMessage, setPopUpMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
+  const [time, setTime] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
-
     if (winningSelections.every((item) => selected.includes(item))) {
       setGameWon(true);
+      setShowModal(true);
     }
   }, [selected]);
 
@@ -110,10 +113,19 @@ function App() {
               <div className={"popup-content"}>{popUpMessage}</div>
             </div>
           )}
+          {gameWon && showModal && (
+            <WinnerModal
+              time={time}
+              setGameWon={setGameWon}
+              setShowModal={setShowModal}
+            />
+          )}
           <Header
             gameStart={gameStart}
             fadeAvatar={fadeAvatar}
             gameWon={gameWon}
+            time={time}
+            setTime={setTime}
           />
 
           <div className="main-image">

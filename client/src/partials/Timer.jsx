@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Timer({ gameStart, gameWon }) {
-  const [time, setTime] = useState(0);
-
+export default function Timer({ gameStart, gameWon, time, setTime }) {
   useEffect(() => {
     let interval;
 

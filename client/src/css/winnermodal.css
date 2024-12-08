@@ -1,0 +1,70 @@
+.winner-modal {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem 5rem 3rem 5rem;
+  background-color: #1a1928f1;
+  border: 1px solid #888888b1;
+  border-radius: 1rem;
+  width: 50%;
+  height: 50%;
+}
+
+h1 {
+  color: #e0b950;
+}
+
+.winning-message {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.close-modal {
+  color: #ffffff3c;
+}
+
+.close-modal:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+}
+
+.initials-input {
+  font-weight: 800;
+  text-align: center;
+  font-size: 3rem;
+  width: 80%;
+  border: none;
+  background-color: transparent;
+  text-transform: uppercase;
+}
+
+.initials-btn {
+  padding: 0.75rem 5rem;
+  border: 3px solid transparent;
+  color: #fff;
+  background-color: #f0211f;
+  border-radius: 1rem;
+  font-size: 2rem;
+  font-weight: 800;
+  transition: all 300ms ease;
+}
+
+.initials-btn:hover {
+  cursor: pointer;
+  color: white;
+  border: 3px solid #e0b950;
+}

@@ -91,7 +91,6 @@
   padding: 5vh 5vw;
 }
 
-/* The Modal (background) */
 .modal {
   position: fixed;
   z-index: 1;
@@ -104,7 +103,6 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Modal Content/Box */
 .modal-content {
   position: absolute;
   display: flex;
@@ -148,7 +146,6 @@
   overflow: auto;
 }
 
-/* Modal Content/Box */
 .popup-content {
   font-family: "Oxanium", monospace;
   font-size: 1.4rem;

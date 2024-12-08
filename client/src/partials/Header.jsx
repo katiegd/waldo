@@ -4,7 +4,13 @@ import DaVinci from "../assets/daVinciBot.png";
 import Logo from "../assets/logo.png";
 import Timer from "./Timer";
 
-export default function Header({ fadeAvatar, gameStart, gameWon }) {
+export default function Header({
+  fadeAvatar,
+  gameStart,
+  gameWon,
+  time,
+  setTime,
+}) {
   // Put timer and icons of characters you're looking for
   return (
     <div className="header">
@@ -27,7 +33,12 @@ export default function Header({ fadeAvatar, gameStart, gameWon }) {
         />
       </div>
       <div className="timer">
-        <Timer gameStart={gameStart} gameWon={gameWon} />
+        <Timer
+          gameStart={gameStart}
+          gameWon={gameWon}
+          time={time}
+          setTime={setTime}
+        />
       </div>
     </div>
   );
