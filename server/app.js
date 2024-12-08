@@ -28,8 +28,6 @@ app.get("/", (req, res) => {
 app.post("/check-coordinates", async (req, res) => {
   const { x, y, name } = req.body;
 
-  console.log("What's being sent:", x, y, name);
-
   try {
     const coordMatch = await db.checkCoordinates(x, y, name);
     if (coordMatch) {

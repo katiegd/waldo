@@ -2,8 +2,9 @@ import Nibbler from "../assets/Nibbler.png";
 import Scruffy from "../assets/Scruffy.png";
 import DaVinci from "../assets/daVinciBot.png";
 import Logo from "../assets/logo.png";
+import Timer from "./Timer";
 
-export default function Header({ fadeAvatar }) {
+export default function Header({ fadeAvatar, gameStart, gameWon }) {
   // Put timer and icons of characters you're looking for
   return (
     <div className="header">
@@ -25,7 +26,9 @@ export default function Header({ fadeAvatar }) {
           className={fadeAvatar.DaVinci ? "avatar faded" : "avatar"}
         />
       </div>
-      <div className="timer">Timer</div>
+      <div className="timer">
+        <Timer gameStart={gameStart} gameWon={gameWon} />
+      </div>
     </div>
   );
 }

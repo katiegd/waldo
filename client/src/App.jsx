@@ -24,6 +24,15 @@ function App() {
     Nibbler: false,
   });
 
+  useEffect(() => {
+    const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
+
+    if (winningSelections.every((item) => selected.includes(item))) {
+      setGameWon(true);
+      console.log("You win!");
+    }
+  }, [selected]);
+
   function clickHandler(e) {
     setClicked(true);
 
@@ -79,21 +88,17 @@ function App() {
       translateX: translateX,
       translateY: translateY,
     });
-
-    console.log(fadeAvatar);
-
-    const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
-
-    if (winningSelections.every((item) => selected.includes(item))) {
-      setGameWon(true);
-    }
   }
 
   return (
     <>
       {gameStart ? (
         <>
-          <Header fadeAvatar={fadeAvatar} />
+          <Header
+            gameStart={gameStart}
+            fadeAvatar={fadeAvatar}
+            gameWon={gameWon}
+          />
 
           <div className="main-image">
             {clicked ? (

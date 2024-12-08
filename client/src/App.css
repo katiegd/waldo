@@ -141,3 +141,14 @@
   border-radius: 0.5rem;
   background-color: hsla(244, 23%, 19%, 1);
 }
+
+.popup-message {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  background-color: #1a1928f1;
+  border: 1px solid #888888b1;
+  width: 200px;
+}

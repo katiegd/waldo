@@ -26,8 +26,6 @@ async function populateWinners() {
 }
 
 async function checkCoordinates(x, y, char) {
-  console.log("This is in the queries call", x, y, char);
-
   const winningClick = await prisma.winners.findFirst({
     where: {
       xMin: { lte: x },
@@ -37,7 +35,6 @@ async function checkCoordinates(x, y, char) {
       name: char,
     },
   });
-  console.log(winningClick);
   return winningClick;
 }
 
