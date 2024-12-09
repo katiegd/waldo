@@ -12,6 +12,7 @@ export default function WinnerModal({
   const seconds = (formattedTime % 60).toFixed(2);
   const [error, setError] = useState(null);
   const [initials, setInitials] = useState("");
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -30,7 +31,7 @@ export default function WinnerModal({
     }
 
     try {
-      await fetch("http://localhost:3000/scoreboard", {
+      await fetch(`${BASE_URL}/scoreboard`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

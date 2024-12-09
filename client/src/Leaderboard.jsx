@@ -5,6 +5,7 @@ import "./css/winnermodal.css";
 export default function Leaderboard({ setShowLeaderboard }) {
   const [scores, setScores] = useState([]);
   const [error, setError] = useState(null);
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   function formatDate(date) {
     const newDate = new Date(date);
@@ -20,7 +21,7 @@ export default function Leaderboard({ setShowLeaderboard }) {
   useEffect(() => {
     async function getScores() {
       try {
-        const response = await fetch("http://localhost:3000/scoreboard", {
+        const response = await fetch(`${BASE_URL}/scoreboard`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

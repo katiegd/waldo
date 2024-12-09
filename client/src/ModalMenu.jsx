@@ -12,11 +12,11 @@ export default function ModalMenu({
   setFadeAvatar,
   setPopUpMessage,
 }) {
-  // Show popUp for 5 seconds, then hides and clears the message.
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   async function handleSelection(char) {
     try {
-      const response = await fetch("http://localhost:3000/check-coordinates", {
+      const response = await fetch(`${BASE_URL}/check-coordinates`, {
         // Need to change fetch endpoint to be dynamic.
         method: "POST",
         headers: {
