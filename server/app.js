@@ -30,6 +30,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
+console.log("Serving React from:", path.join(__dirname, "dist", "index.html"));
+
 PORT = process.env.PORT || 3000;
 
 initiateDb();
