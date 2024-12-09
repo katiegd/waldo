@@ -9,7 +9,13 @@ require("dotenv").config();
 const app = express();
 
 async function initiateDb() {
-  await db.populateWinners();
+  try {
+    const database = await db.populateWinners();
+    return database;
+  } catch (err) {
+    console.error(err);
+    return;
+  }
 }
 
 const corsOptions = {
@@ -34,4 +40,4 @@ PORT = process.env.PORT || 3000;
 
 initiateDb();
 
-app.listen(PORT, () => console.log(`App listenening at port ${PORT}`));
+app.listen(PORT, () => console.log(`App listening at port ${PORT}`));
