@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd .. && cd client && npm run build && rm -rf ../server/dist && mkdir -p ../server/dist && mv dist ../server/dist",
-    "deploy": "npm run build && npx prisma generate && npx prisma migrate deploy && node app"
+    "deploy": "npx prisma generate && npx prisma migrate deploy && node app"
   },
   "keywords": [],
   "author": "",
