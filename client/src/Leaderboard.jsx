@@ -28,6 +28,7 @@ export default function Leaderboard({ setShowLeaderboard }) {
           },
         });
         const data = await response.json();
+
         setScores(data);
       } catch (err) {
         console.error(err);
@@ -44,20 +45,24 @@ export default function Leaderboard({ setShowLeaderboard }) {
         <div className="winner-modal">
           <h1>Scoreboard</h1>
           <table className="scores">
-            <tr className="scores-header">
-              <th className="scores-header"></th>
-              <th className="scores-header">Player</th>
-              <th className="scores-header">Time (seconds)</th>
-              <th className="scores-header">Date Achieved</th>
-            </tr>
-            {scores.slice(0, 5).map((score, index) => (
-              <tr className="score-row" key={score.id}>
-                <td className="score-rank">#{index + 1}</td>
-                <td className="score-name">{score.name}</td>
-                <td className="score-time">{score.score}</td>
-                <td className="score-date">{formatDate(score.createdAt)}</td>
+            <thead>
+              <tr className="scores-header">
+                <th className="scores-header"></th>
+                <th className="scores-header">Player</th>
+                <th className="scores-header">Time (seconds)</th>
+                <th className="scores-header">Date Achieved</th>
               </tr>
-            ))}
+            </thead>
+            <tbody>
+              {scores.slice(0, 5).map((score, index) => (
+                <tr className="score-row" key={score.id}>
+                  <td className="score-rank">#{index + 1}</td>
+                  <td className="score-name">{score.name}</td>
+                  <td className="score-time">{score.score}</td>
+                  <td className="score-date">{formatDate(score.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
           <p
             className="close-scores"

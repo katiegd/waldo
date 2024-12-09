@@ -73,7 +73,7 @@ export default function Header({
 }
 
 Header.propTypes = {
-  fadeAvatar: PropTypes.func,
+  fadeAvatar: PropTypes.object,
   gameStart: PropTypes.bool,
   gameWon: PropTypes.bool,
   time: PropTypes.number,

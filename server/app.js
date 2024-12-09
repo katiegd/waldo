@@ -13,7 +13,7 @@ async function initiateDb() {
 }
 
 const corsOptions = {
-  origin: "https://findfuturama.netlify.app",
+  origin: ["https://waldo-zfkw.onrender.com"],
   methods: "GET, POST",
 };
 
@@ -29,8 +29,6 @@ app.use("/", router);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
-
-console.log("Serving React from:", path.join(__dirname, "dist", "index.html"));
 
 PORT = process.env.PORT || 3000;
 
