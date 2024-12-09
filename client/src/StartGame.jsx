@@ -1,4 +1,5 @@
 import Logo from "./assets/logo.png";
+import PropTypes from "prop-types";
 
 export default function StartGame({ setGameStart }) {
   return (
@@ -21,3 +22,7 @@ export default function StartGame({ setGameStart }) {
     </div>
   );
 }
+
+StartGame.propTypes = {
+  setGameStart: PropTypes.func,
+};

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import Header from "./partials/Header";
 import Footer from "./partials/Footer";
 import StartGame from "./StartGame";
-import ModalMenu from "./assets/ModalMenu";
+import ModalMenu from "./ModalMenu";
 import WinnerModal from "./WinnerModal";
+import Leaderboard from "./Leaderboard";
 import futurama from "../src/assets/main-image-cropped.png";
 import "./App.css";
 
@@ -27,13 +28,23 @@ function App() {
   const [popUpMessage, setPopUpMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [time, setTime] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  const [showWinnerModal, setShowWinnerModal] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+
+  function restartGame() {
+    setSelected([]);
+    setFadeAvatar({ Scruffy: false, DaVinci: false, Nibbler: false });
+    setTime(0);
+    setGameWon(false);
+    setGameStart(false);
+    setGameStart(true);
+  }
 
   useEffect(() => {
     const winningSelections = ["Scruffy", "DaVinci", "Nibbler"];
     if (winningSelections.every((item) => selected.includes(item))) {
       setGameWon(true);
-      setShowModal(true);
+      setShowWinnerModal(true);
     }
   }, [selected]);
 
@@ -113,11 +124,15 @@ function App() {
               <div className={"popup-content"}>{popUpMessage}</div>
             </div>
           )}
-          {gameWon && showModal && (
+          {showLeaderboard && (
+            <Leaderboard setShowLeaderboard={setShowLeaderboard} />
+          )}
+          {gameWon && showWinnerModal && (
             <WinnerModal
               time={time}
               setGameWon={setGameWon}
-              setShowModal={setShowModal}
+              setShowWinnerModal={setShowWinnerModal}
+              setShowLeaderboard={setShowLeaderboard}
             />
           )}
           <Header
@@ -126,6 +141,8 @@ function App() {
             gameWon={gameWon}
             time={time}
             setTime={setTime}
+            restartGame={restartGame}
+            setShowLeaderboard={setShowLeaderboard}
           />
 
           <div className="main-image">

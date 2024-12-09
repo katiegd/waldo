@@ -38,7 +38,26 @@ async function checkCoordinates(x, y, char) {
   return winningClick;
 }
 
+async function getScoreboard() {
+  return await prisma.scoreboard.findMany({
+    orderBy: {
+      score: "asc",
+    },
+  });
+}
+
+async function postToScoreboard(name, score) {
+  return await prisma.scoreboard.create({
+    data: {
+      name: name,
+      score: score,
+    },
+  });
+}
+
 module.exports = {
   populateWinners,
   checkCoordinates,
+  getScoreboard,
+  postToScoreboard,
 };

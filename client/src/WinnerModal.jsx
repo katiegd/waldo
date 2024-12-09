@@ -1,12 +1,54 @@
 import { useState } from "react";
 import "./css/winnermodal.css";
+import PropTypes from "prop-types";
 
-export default function WinnerModal({ time, setGameWon, setShowModal }) {
-  const formattedTime = time / 1000;
+export default function WinnerModal({
+  time,
+  setShowWinnerModal,
+  setShowLeaderboard,
+}) {
+  const formattedTime = (time / 1000).toFixed(2);
   const minutes = Math.floor(formattedTime / 60);
-  const seconds = formattedTime % 60;
+  const seconds = (formattedTime % 60).toFixed(2);
+  const [error, setError] = useState(null);
+  const [initials, setInitials] = useState("");
 
-  // Set up POST function here to send to back end.
+  function handleChange(e) {
+    const { name, value } = e.target;
+    if (name === "initials") {
+      const uppValue = value.toUpperCase();
+      setInitials(uppValue);
+    }
+  }
+
+  async function postScores(e) {
+    e.preventDefault();
+
+    if (initials === "" || initials.length < 3) {
+      setError("Please enter 3 initials.");
+      return;
+    }
+
+    try {
+      await fetch("http://localhost:3000/scoreboard", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          time: formattedTime,
+          initials: initials,
+        }),
+      });
+    } catch (err) {
+      setError(err);
+      console.error(err);
+    }
+    setShowWinnerModal(false);
+    setTimeout(() => {
+      setShowLeaderboard(true);
+    }, 100);
+  }
 
   return (
     <>
@@ -28,14 +70,30 @@ export default function WinnerModal({ time, setGameWon, setShowModal }) {
               id="initials"
               maxLength={3}
               placeholder="- - - "
+              value={initials}
+              onChange={(e) => {
+                handleChange(e);
+              }}
               required
             />
             <br />
-            <button type="submit" className="initials-btn">
+            {error && <div className="error-message">{error}</div>}
+            <button
+              type="submit"
+              className="initials-btn"
+              onClick={(e) => {
+                postScores(e);
+              }}
+            >
               Submit
             </button>
           </form>
-          <p className="close-modal" onClick={() => setShowModal(false)}>
+          <p
+            className="close-modal"
+            onClick={() => {
+              setShowWinnerModal(false);
+            }}
+          >
             No, thanks.
           </p>
         </div>
@@ -43,3 +101,9 @@ export default function WinnerModal({ time, setGameWon, setShowModal }) {
     </>
   );
 }
+
+WinnerModal.propTypes = {
+  time: PropTypes.number,
+  setShowWinnerModal: PropTypes.func,
+  setShowLeaderboard: PropTypes.func,
+};

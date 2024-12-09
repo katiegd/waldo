@@ -1,11 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const db = require("./models/queries");
+const router = require("./routes/index.js");
+const db = require("./models/queries.js");
 
 require("dotenv").config();
 
 const app = express();
+
 async function initiateDb() {
   await db.populateWinners();
 }
@@ -21,26 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "dist")));
 
-app.get("/", (req, res) => {
-  res.send("You did it!");
-});
+app.use("/", router);
 
-app.post("/check-coordinates", async (req, res) => {
-  const { x, y, name } = req.body;
-
-  try {
-    const coordMatch = await db.checkCoordinates(x, y, name);
-    if (coordMatch) {
-      res
-        .status(200)
-        .json({ coordMatch, message: `You found ${coordMatch.name}` });
-    } else {
-      res.status(200).json({ message: `Nope. Keep looking!` });
-    }
-  } catch (err) {
-    console.error("Error checking coordinates.", err);
-    res.status(500).json({ message: "An error occurred.", err });
-  }
+// To serve React front end
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist"));
 });
 
 PORT = process.env.PORT || 3000;

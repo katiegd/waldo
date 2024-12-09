@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 export default function Timer({ gameStart, gameWon, time, setTime }) {
   useEffect(() => {
@@ -21,3 +22,10 @@ export default function Timer({ gameStart, gameWon, time, setTime }) {
     </div>
   );
 }
+
+Timer.propTypes = {
+  gameStart: PropTypes.bool,
+  gameWon: PropTypes.bool,
+  time: PropTypes.number,
+  setTime: PropTypes.func,
+};

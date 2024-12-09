@@ -10,11 +10,6 @@
   width: 50vw;
 }
 
-.logo {
-  width: 250px;
-  height: fit-content;
-}
-
 .card {
   padding: 2em;
 }
@@ -22,49 +17,6 @@
 .futurama-img {
   max-width: 2000px;
   width: 95vw;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  padding: 0.5rem 1rem;
-  background-color: #1a1928e3;
-}
-
-.avatar-container {
-  display: flex;
-  gap: 10px;
-}
-
-.avatar {
-  width: 75px;
-  height: 75px;
-  border: 3px solid #f7d059;
-  border-radius: 50%;
-}
-
-.faded {
-  transition: all 300ms ease;
-  opacity: 20%;
-  transform: scale(0.8);
-  animation: growAndShrink 500ms ease-in-out;
-}
-
-@keyframes growAndShrink {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-    rotate: 10deg;
-  }
-  100% {
-    transform: scale(0.9);
-    rotate: -10deg;
-  }
 }
 
 .start-btn {
@@ -125,15 +77,6 @@
   cursor: pointer;
   border-radius: 0.5rem;
   background-color: hsla(244, 23%, 19%, 1);
-}
-
-.timer {
-  text-align: end;
-  font-family: "Oxanium", monospace;
-  font-size: 3rem;
-  color: #f0211f;
-  text-shadow: 1px 1px 0 #e0b950, -1px 1px 0 #e0b950, -1px -1px 0 #e0b950,
-    1px -1px 0 #e0b950;
 }
 
 .popup-modal {
@@ -200,4 +143,60 @@
     opacity: 0;
     transform: translateX(100%); /* Move off-screen */
   }
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+  background-color: #eae7de1e;
+}
+
+td {
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  background-color: #17122ade;
+}
+
+.scores-header {
+  font-weight: 800;
+  color: #e0b950;
+}
+
+.score-name {
+  font-weight: 800;
+}
+
+.close-scores {
+  background-color: #f0221f98;
+  border: 1px solid #f0211f;
+  border-radius: 0.75rem;
+  padding: 0.5rem 2rem;
+  font-weight: 800;
+  font-size: 1rem;
+  transition: all 300ms ease;
+}
+
+.close-scores:hover {
+  cursor: pointer;
+  background-color: #f0211f;
+  border: 1px solid #f0211f;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.artist-attr {
+  color: #e0b950;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.artist-attr:hover {
+  text-decoration: underline;
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import Nibbler from "../assets/Nibbler.png";
-import Scruffy from "../assets/Scruffy.png";
-import DaVinci from "../assets/daVinciBot.png";
+import Nibbler from "../src/assets/Nibbler.png";
+import Scruffy from "../src/assets/Scruffy.png";
+import DaVinci from "../src/assets/daVinciBot.png";
+import PropTypes from "prop-types";
 
 export default function ModalMenu({
   setClicked,
@@ -14,7 +15,6 @@ export default function ModalMenu({
   // Show popUp for 5 seconds, then hides and clears the message.
 
   async function handleSelection(char) {
-    // Save time & username to database.
     try {
       const response = await fetch("http://localhost:3000/check-coordinates", {
         // Need to change fetch endpoint to be dynamic.
@@ -91,3 +91,12 @@ export default function ModalMenu({
     </>
   );
 }
+
+ModalMenu.propTypes = {
+  setClicked: PropTypes.func,
+  modalMenu: PropTypes.object,
+  coords: PropTypes.object,
+  setSelected: PropTypes.func,
+  setFadeAvatar: PropTypes.func,
+  setPopUpMessage: PropTypes.func,
+};
