@@ -8,15 +8,13 @@ require("dotenv").config();
 
 const app = express();
 
-async function initiateDb() {
-  try {
-    const database = await db.populateWinners();
-    return database;
-  } catch (err) {
-    console.error(err);
-    return;
-  }
-}
+// async function initiateDb() {
+//   try {
+//     await db.populateWinners();
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
 
 const corsOptions = {
   origin: ["https://waldo-zfkw.onrender.com"],
@@ -38,6 +36,6 @@ app.get("*", (req, res) => {
 
 PORT = process.env.PORT || 3000;
 
-initiateDb();
+// initiateDb();
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));
