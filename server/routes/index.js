@@ -3,10 +3,6 @@ const db = require("../models/queries");
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("You did it!");
-});
-
 router.post("/check-coordinates", async (req, res) => {
   const { x, y, name } = req.body;
 

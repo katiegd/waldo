@@ -7,17 +7,19 @@ const db = require('./models/queries.js');
 require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 async function initiateDb() {
   try {
     await db.populateWinners();
+    console.log('Winners populated!');
   } catch (err) {
     console.error(err);
   }
 }
 
 const corsOptions = {
-  origin: ['https://waldo-zfkw.onrender.com'],
+  origin: process.env.CORS_ORIGIN,
   methods: 'GET, POST',
 };
 
@@ -34,8 +36,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-PORT = process.env.PORT || 3000;
-
-initiateDb();
-
-app.listen(PORT, () => console.log(`App listening at port ${PORT}`));
+// Start server IIFE
+(async function startServer() {
+  try {
+    await initiateDb();
+    app.listen(PORT, () => console.log(`App listening at port ${PORT}`));
+  } catch (err) {
+    console.error('Failed to start server.', err);
+    process.exit(1);
+  }
+})();
