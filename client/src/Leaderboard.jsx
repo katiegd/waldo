@@ -18,6 +18,8 @@ export default function Leaderboard({ setShowLeaderboard }) {
     return formattedDate;
   }
 
+  console.log(BASE_URL);
+
   useEffect(() => {
     async function getScores() {
       try {
